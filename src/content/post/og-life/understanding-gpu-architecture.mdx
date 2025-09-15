@@ -1,0 +1,69 @@
+---
+title: 'Understanding GPU Architecture'
+date: '2024-02-14T00:00:00-0800'
+tags: ['work', 'software', 'hardware']
+draft: false
+summary: 'Understanding GPU architecture, particularly how hip/cuda relates to the hardware.'
+layout: PostSimple
+---
+
+# Understanding GPU Architecture
+
+## HIP/CUDA Kernels
+
+Follows Nvidia terminology.
+
+Multi-dimensional here means exclusively 1-, 2-, or 3-dimensional.
+
+Thread: sequences of instructions.
+Block: a multi-dimensional container of threads (up to 1024 in the product of its dimensions); all threads in a block are expected to reside on the same CU/SM.
+Grid: a multi-dimensional container of blocks.
+
+Therefore it is correct to say a grid contains blocks which each contain threads.
+
+threadIdx are the coordinates of the thread within a block.
+blockIdx are the coordinates of the block within a grid.
+blockDim is the dimensions of the block.
+gridDim is the dimensions of the grid.
+
+The reason for this two levels of hierarchy is that the block size is limited to 1024, whereas a grid can contain a near-infinite (dependent on architecture) number of blocks. This allows for automatic scalability, e.g a kernel with 8 blocks will do 2 blocks at a time on a 2 CU/SM GPU and 4 blocks at a time on a 4 CU/SM GPU, but the -Idx and -Dim values in the code are the same regardless of which GPU the kernel is ran on.
+
+#### Shared Memory
+
+Shared memory is a memory space that is shared by all threads in a thread block. By extension, that means every CU/SM has its own shared memory.
+
+## Terminology
+
+### OpenCL/AMD
+
+#### Threading Model
+
+Workgroup: a collection of wavefronts or work-items (limited to 1024 work-items === 16 wavefronts).
+Wavefront: a collection of 64 work-items that execute in parallel on a compute-unit (CU).
+Work-item: a single element of work.
+
+Once a block is allocated to a CU, it is further divided into a set of wavefronts for execution.
+
+#### Hardware
+
+Compute Unit (CU): an independent processor that is designed to operate on streams of data; contains a Local Data Share (LDS) (a shared memory), 4 SIMDs, SGPRs, and a SALU.
+Single instruction multiple data (SIMD): basic execution units that contain VGPRs, and a VALU.
+
+Each CU has its own L1 Cache. L2 Cache is shared among all CUs.
+
+Source
+https://www.amd.com/content/dam/amd/en/documents/instinct-tech-docs/instruction-set-architectures/amd-instinct-mi300-cdna3-instruction-set-architecture.pdf
+
+### Nvidia
+
+#### Threading Model
+
+Grid: a collection of blocks.
+Block: a collection of warps/threads (limited to 1024 in the product of its dimensions).
+Warp: a collection of 32 threads that execute in parallel on a streaming multiprocessor (SM).
+Thread: sequences of instructions.
+
+Once a block is allocated to an SM, it is further divided into a set of warps for execution.
+
+Source
+https://docs.nvidia.com/cuda/cuda-c-programming-guide/index.html

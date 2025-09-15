@@ -1,0 +1,56 @@
+---
+title: 'C/C++ Development Tricks'
+date: '2024-03-21T00:00:00-0800'
+tags: ['programming']
+draft: false
+summary: 'Tricks to speed up your C++ development workflow.'
+layout: PostSimple
+---
+
+# C Development Tricks
+
+## Makefile
+```
+TARGET = prog
+LIBS = -lm
+CC = gcc
+CFLAGS = -O3 -g -Wall -Wextra -std=gnu2x -fsanitize=undefined -fsanitize=address
+# -fsanitize=address
+BUILD_DIR = build
+
+.PHONY: default all clean
+
+default: $(TARGET)
+all: default
+
+OBJECTS = $(patsubst %.c, $(BUILD_DIR)/%.o, $(wildcard *.c))
+HEADERS = $(wildcard *.h)
+
+$(BUILD_DIR)/%.o: %.c $(HEADERS) | $(BUILD_DIR)
+	$(CC) $(CFLAGS) -c $< -o $@
+
+$(BUILD_DIR):
+	mkdir -p $@
+
+.PRECIOUS: $(TARGET) $(OBJECTS)
+
+$(TARGET): $(OBJECTS)
+	$(CC) $^ $(CFLAGS) $(LIBS) -o $@
+
+clean:
+	-rm -rf $(BUILD_DIR)
+	-rm -f $(TARGET)
+```
+
+# C++ Development Tricks
+
+## VSCode: Compile Active File
+
+If you have the CMake extension installed for VSCode and setup properly (e.g. connect to correct compiler toolchain), there is a command palette called `>CMake: Compile Active File`. If you run it with a C++ source file open, it'll run the compiler command for that specific source file, with all the arguments provided by CMake, allowing you to debug one file at a time.
+
+With a bit of playing around, you may also be able to view the errors, error-by-error, using the "PROBLEMS" tab on the bottom (select it instead of "OUTPUT" or "TERMINAL").
+
+## VSCode: Debugging with LLDB/GDB
+
+Populating `./.vscode/launch.json` allows you to use the built-in debugging interface to debug code. This includes setting breakpoints in the source code using the VSCode window. Really handy once it's properly setup!
+

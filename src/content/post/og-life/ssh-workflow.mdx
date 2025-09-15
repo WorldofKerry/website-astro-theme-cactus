@@ -1,0 +1,135 @@
+---
+title: 'SSH Workflow'
+date: '2024-02-21T00:00:00-0800'
+tags: ['programming']
+draft: false
+summary: 'Efficient workflow through SSH.'
+layout: PostSimple
+---
+
+# SSH Workflow
+
+The current tools I use to work in a remote environment (i.e. work is done on servers) is as follows:
+
+1. Windows computer
+2. [Git Bash](https://git-scm.com/downloads) as default terminal
+3. [VSCode](https://code.visualstudio.com/download) as code editor
+
+## Setting up SSH Keys
+
+SSH keys are used to avoid passwords.
+
+### Generation
+
+```bash
+ssh-keygen
+# Spam enter for defaults
+```
+
+Note: a single key should exist on each physical device (e.g. one for desktop, one for laptop). We are only providing the public key to outsiders (e.g. servers, Github). Thus, if our local device's private key is compromised, most likely all of the private keys will be compromised as well.
+
+[Source](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent)
+
+### Adding to Github Account
+
+[Settings page of Github Account](https://github.com/settings/keys)
+
+[Source](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/adding-a-new-ssh-key-to-your-github-account)
+
+### SSH Configuration
+
+Populate `~/.ssh/config` with information. The `~` refers to the home directory of your local device (in my case Windows device). Here is example with a proxy jump:
+
+```
+Host short-nickname
+  HostName 11.111.11.11
+  ForwardAgent yes
+  ProxyJump loginnode
+  IdentityFile ~/.ssh/id_ed25519
+
+Host loginnode
+  HostName very-cool-name
+  ForwardAgent yes
+  IdentityFile ~/.ssh/id_ed25519
+```
+
+More [configurations options](https://www.ssh.com/academy/ssh/config)
+
+### Copying SSH key to Servers
+
+This allows you to directly `ssh nickname` using your SSH keys instead of password.
+
+`ssh-copy-id nickname`
+
+[Source](https://www.digitalocean.com/community/tutorials/how-to-configure-ssh-key-based-authentication-on-a-linux-server)
+
+### Auto SSH agent
+
+Add following to your `.bash_profile` to automatically create and add keys to an agent on creation of a terminal.
+
+```bash
+SSH_ENV="$HOME/.ssh/agent-environment"
+
+function start_agent {
+    echo "Initialising new SSH agent..."
+    /usr/bin/ssh-agent | sed 's/^echo/#echo/' > "${SSH_ENV}"
+    echo succeeded
+    chmod 600 "${SSH_ENV}"
+    . "${SSH_ENV}" > /dev/null
+    /usr/bin/ssh-add;
+}
+
+# Source SSH settings, if applicable
+
+if [ -f "${SSH_ENV}" ]; then
+    . "${SSH_ENV}" > /dev/null
+    #ps ${SSH_AGENT_PID} doesn't work under cywgin
+    ps -ef | grep ${SSH_AGENT_PID} | grep ssh-agent$ > /dev/null || {
+        start_agent;
+    }
+else
+    start_agent;
+fi
+```
+
+[Source](https://stackoverflow.com/a/18915067)
+
+### Forwarding SSH Agents to VSCode Remote-SSH Remote Terminals
+
+For some reason, when you open VSCode through the desktop application (e.g. start menu), ssh agents ENV variables are not passed to the VSCode instance, and thus do not exist in terminals opened on the remote. The workaround is to open VSCode from a terminal that has the SSH agent, in my case, usually Git Bash with `code` (with no other VSCode windows open). This will allow all VSCode terminals created from that session to have the proper agents created in `.bash_profile`.
+
+[Source](https://www.reddit.com/r/vscode/comments/18jakej/vscode_remotessh_refuses_to_use_sshagent_on_local/)
+
+### SSH Helper Function
+
+A shell utilty function that combines an ssh and `cd`ing into a directory can be done as follows
+
+```bash
+sshh() {
+    ssh -t $1 cd ${2:-/path/to/default/dir/} ';' exec /bin/bash
+}
+```
+
+Execute with `sshh remote-name`.
+
+## Development
+
+### Text Editing
+
+I like VSCode as my text editor.
+
+I use the [`Remote - SSH`](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-ssh) extension to attach a VSCode window to a remote SSH. Use `>Remote-SSH: Connect Current Window to Host` in VSCode.
+
+### Docker Containers
+
+I use the [`Dev Containers`](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers) to mount a running container to my VSCode window. This allows the full intellisense, etc. tools to work perfectly, as-if I were working locally on that server. Use `>Dev Containers: Attach to Running Container` in VSCode.
+
+To configure default user, workspace directory, etc., use `>Dev Containers: Open Attached Container Configuration File` in VSCode, which opens a JSON file, where you can add
+
+```json
+{
+  ...
+	"workspaceFolder": "/data",
+	"remoteUser": "username"
+}
+```

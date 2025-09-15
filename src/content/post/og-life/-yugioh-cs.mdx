@@ -1,0 +1,121 @@
+---
+title: 'Learning Computer Science through Yugioh'
+date: '2023-03-22T00:00:00-0800'
+tags: ['life', 'gaming']
+draft: true
+summary: 'A Yugioh archetype that is based on computer science. '
+layout: PostSimple
+---
+
+# Computer Science Yugioh Archetype
+
+Main Concepts:
+
+- The field is the Stack
+- The graveyard is the Heap
+
+## Main Deck Monsters
+
+### Type: Floating Point
+
+Type: Tuner
+Attribute:
+Level: 4
+ATK: 2300
+DEF: 800
+When this card attacks, flip a coin. If heads, this card gains 1000 ATK. If tails, this card loses 1000 ATK. If this card leaves the field, shuffle it into the deck.
+
+## Extra Deck Monsters
+
+### Type: Pointer
+
+Type: XYZ
+Attribute:
+Level:
+ATK: 0
+DEF: 0
+1 "Type" monster
+You can only XYZ "Type: Pointer" once per turn. If this card uses a XYZ monster as material, attach all of its materials to this card. Once per turn, if you control "Operators", you can special summon a monster attached to this card as material. This card gains attack equal to the combined attack of all monsters attached to it. This card gains rank equal to the combined level/rank of all monsters attached to it.
+
+### DS: Array
+
+Type: Synchro
+Attribute:
+Level: 12
+ATK: 4000
+DEF: 4000
+"Type: Pointer" + 1 or more non-tuner "Type" or "DS" monsters with the same level
+Must be either Fusion Summoned or Special Summoned by Tributing the above cards you control (in which case you do not use "Polymerization"). This card can attack a number of times equal to the number of monsters used to summon it.
+
+### DS: Graph
+
+Type: Link
+Attribute:
+Level: 3
+ATK:
+DEF:
+
+### DS: Linked List
+
+Type: XYZ
+Attribute:
+Rank: 4
+ATK:
+DEF:
+2 or more "Type: Pointer"
+You can only XYZ "Type: Pointer" once per turn. If this card uses a XYZ monster as material, attach all of its materials to this card. Once per turn, if you control "Operators", you can special summon a monster attached to this card as material. This card gains attack equal to the combined attack of all monsters attached to it. This card gains rank equal to the combined level/rank of all monsters attached to it.
+
+### DS: Map
+
+Type: Synchro
+Attribute:
+Level: 8
+ATK:
+DEF:
+1 "Type" tuner + 1 or more non-tuner "Type" or "DS" monsters
+When your opponent activates an effect, discard one card from your hand of the same card type, then negate the activation and destroy it.
+
+## Spells
+
+### Cast
+
+Return one "Type" monster you control to your deck, then special summon one "Type" monster from your deck with a different name. If that monster is the same level as the monster you returned, draw a card, otherwise, add a "Segmentation Fault" or "Buffer Overflow" to your hand (at random).
+
+### Operators
+
+You can use the following effects of "Operators" once per turn, depending on the number of "Type" monsters you control.
+
+1. Target one "Type" monster, increase its attack by 4000 and level by 4, but it cannot attack this turn.
+2. Target a monster your opponent controls, set its attack to 0.
+3. Tribute a "Type" monster, then special summon a "Type: Pointer" from your Extra Deck.
+4. Tribute a "Type: Pointer", then special summon a "DS" monster from your Extra Deck.
+
+### Binary Search
+
+If all your opponents monsters have increasing ATK from the left to the right, or right to left, you can banish a card from your opponents hand, field and graveyard. Otherwise, your opponent chooses to banish one card from their field. If you control "Operators", draw a card.
+
+### Recurse
+
+Target 1 XYZ "DS" monster you control. Special summon "Type" monsters from your deck equal to the number of materials used to summon it. If you control "Operators", draw a card.
+
+### Malloc
+
+Equip to one Fusion, Synchro, or Xyz "DS" monster you control. If it leaves the field, special summon monsters from your graveyard so that the sum of their levels/ranks is equal to the level/rank of the monster you equipped this card to.
+
+### Free
+
+Target 1 "DS" monster in your graveyard. Draw cards equal to its level or rank divided by 4, rounded down, then shuffle it into your deck.
+
+## Trap Cards
+
+### Segmentation Fault
+
+When a monster declares an attack, return all monsters on the field to the hand.
+
+### Floating Point Error
+
+When there's a battle involving a monster you control and a monster your opponent controls, flip a coin, if heads, your monster gains 1000 ATK. If you would lose from taking life point damage, banish this card, and if you do, end the turn-player's turn.
+
+### Buffer Overflow
+
+When a mosnter declares an attack, destroy all monsters on the field, then for each destroyed monster under your control, draw a card.
