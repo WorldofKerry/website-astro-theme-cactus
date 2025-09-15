@@ -5,7 +5,7 @@ publishDate: "05 Dec 2022"
 tags: [project, hardware]
 ---
 
-![System Diagram](/static/images/mnist-hardware-accelerator-1.png)
+![System Diagram](../static-images/mnist-hardware-accelerator-1.png)
 
 [**Lab Instructions**](https://github.com/WorldofKerry/CPEN-311-Lab4)
 
@@ -73,5 +73,5 @@ HDL code can be provided upon request, due to course policies.
 
 ## System Design
 
-![System Diagram](/static/images/mnist-hardware-accelerator-1.png)
+![System Diagram](../static-images/mnist-hardware-accelerator-1.png)
 The neural network and input image are initially uploaded to the SRAM (via FPGA Monitor). The processor then copies the input to bank0. In the first layer, bank0 is used as the input, and its output is stored in bank1. This alternates for each layer. At each layer, dot product with ReLU is used. Using a max function, the classified digit is then displayed on the 7-segment display. The vga output also displays the image that is currently being classified.
