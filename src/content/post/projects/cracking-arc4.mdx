@@ -1,0 +1,56 @@
+---
+title: "Cracking ARC4"
+description: "Cracking ARC4 encrypted ASCII text using a FPGA"
+publishDate: "07 Nov 2022"
+tags: [project, hardware]
+---
+
+![Cracking ARC4](/static/images/cracking-arc4.jpg)
+
+# Summary
+
+Using a FPGA to crack ARC4 encrypted ascii text
+
+## Key Takeaways
+
+- Using multiple on-chip memories
+- Correct read-enable interface
+- Concurrent modules with synchronous memories
+
+# Project Components
+
+## Implemented Modules
+
+- ARC4 State Initilization (to setup memory)
+- Key-Scheduling Algorithm (KSA)
+- ARC4 Pseudo-Random Generation Algorithm (PRGA)
+- ARC4 Cracker (tocrack encrypted text)
+- Concurrent ARC4 Cracker (using two modifier cracker modules)
+
+HDL code can be provided upon request, due to course policies.
+
+## Simulation
+
+- Full testbenchs for all modules using ModelSim Altera
+
+## Compilation
+
+- Quartus Prime
+
+## Hardware
+
+- De1-SoC FPGA
+
+## IP Modules
+
+- RAM 1-PORT (generated with Quartus Prime)
+
+## Provided Information
+
+- Pseudo-code for the algorithms
+
+# Results
+
+Was able to crack the encrypted text in a sane amount of time. The cracked text can then be extracted from the memory using the Intel FPGA Monitor.
+
+![Cracking ARC4](/static/images/cracking-arc4.jpg)

@@ -183,4 +183,4 @@ This is the body of your MDX file.
 
     # Uncomment the lines below to convert actual files
     # convert_mdx_file("example.mdx", "example_converted.mdx")
-    convert_directory(".", "*.mdx")
+    convert_directory("./", "*.mdx")

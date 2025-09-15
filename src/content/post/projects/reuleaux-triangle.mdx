@@ -1,0 +1,53 @@
+---
+title: "Reuleaux Triangle"
+description: "Using a FPGA to draw a Reuleaux triangle on a VGA monitor"
+publishDate: "16 Oct 2022"
+tags: [project, hardware]
+---
+
+![Reuleaux Triangle](/static/images/reuleaux-triangle.jpg)
+
+# Summary
+
+Using a FPGA to draw a Reuleaux Triangle using VGA output
+
+## Key Takeaways
+
+- Used external IP (vga core adapter) for own design
+- Output data externally
+
+# Project Components
+
+## Implemented Modules
+
+- Bresenham circle algorithm
+- Reuleauxtriangle algorithms by using the multiple instances of the circle algorithm with extra bounds
+- Fillscreen with black pixels (to clear the screen)
+
+HDL code can be provided upon request, due to course policies.
+
+## Simulation
+
+- Full testbenchs for all modules using ModelSim Altera
+
+## Compilation
+
+- Quartus Prime
+
+## Hardware
+
+- De1-SoC FPGA
+- VGA-supported monitor
+
+## Provided Modules
+
+- VGA adapter core (converts framebuffer view to VGA output)
+
+## Provided Information
+
+- Pseudo-code for the algorithms
+
+# Results
+
+Able to draw the Reuleaux Triangle on a VGA monitor, such that the pixels mimiced what I ploted in Python.
+![Reuleaux Triangle](/static/images/reuleaux-triangle.jpg)

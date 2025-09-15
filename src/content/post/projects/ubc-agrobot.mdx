@@ -1,0 +1,33 @@
+---
+title: "UBC Agrobot"
+description: "Leaf health classification and object detection work for the UBC Agrobot Design Team"
+publishDate: "09 Sep 2020"
+tags: [project, software]
+---
+
+![Wheat Head Detector](/static/images/agrobot1.jpg)
+
+# Summary
+
+[**Agrobot Blogs**](/tags/agrobot/) and
+[**Agrobot Website**](https://ubcagrobot.com/)
+
+## Image recognition work for the UBC Agrobot Design Team
+
+- Prepared and trained a plant health classifier with data augmentation in the background, with another
+  team member — trained on web scraped leaf images
+- Completed a wheat head detector utilizing TensorFlow Object Detection API and transfer learning for Edge TPU deployment–with mAP of .84 on the validation set
+- Implemented a leaf health classifier with hough line and circle transform
+- Working with Intel Realsense to get leaf surface area computations for biomass estimation
+
+# Results
+
+## Wheat Head Detector
+
+Trained on google colab, using tensorflow 2 for edge devices. Uses transfer learning based on SSD Mobilenet.
+
+![Wheat Head Detector](/static/images/agrobot1.jpg)
+
+## Frame Extractor
+
+Python script extracts frames from our robot's video feed based on the speed of the robot.

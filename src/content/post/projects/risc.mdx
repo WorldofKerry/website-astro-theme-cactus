@@ -1,0 +1,53 @@
+---
+title: "RISC"
+description: "Building reduced instruction set computer to understand computation and logic"
+publishDate: "01 Dec 2021"
+tags: [project, hardware]
+---
+
+![Overview Diagram](/static/images/reduced-instruction-set-computer1.png)
+
+# Summary
+
+Implemented a 16-bit RISC computer, using custom assembly and machine code. Can read instructions/data to/from memory, and perform basic computations.
+
+## Key Takeaways
+
+- Modular Design
+- I/O interface
+
+# Project Components
+
+## Implemented Modules
+
+- Arithmetic-Logic Unit (ALU)
+- Datapath (Uses the 'registers' and ALU to logic)
+- CPU (Interface for datapath, state machine, memory, and I/O)
+- Shifter (Shifts data by a given amount)
+- Register File (Emulates registers in a CPU)
+- State Machine (Controls instruction decode and datapath)
+- Instruction Decoder (Decodes instructions)
+
+HDL code can be provided upon request, due to course policies.
+
+## Simulation
+
+- Full testbenchs for all modules using ModelSim Altera
+
+## Compilation
+
+- Quartus Prime
+
+## Hardware
+
+- De1-SoC FPGA
+
+## Provided Information
+
+Diagrams of the CPU, state machine, datapath, and ALU
+
+![Overview Diagram](/static/images/reduced-instruction-set-computer1.png)
+
+## Assembly-to-Machine-Code Assembler
+
+Using bison, bzip2, flex, installed via Cygwin

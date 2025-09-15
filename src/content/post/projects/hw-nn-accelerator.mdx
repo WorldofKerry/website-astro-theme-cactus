@@ -1,0 +1,77 @@
+---
+title: "HW NN Accelerator"
+description: "Using hardware to accelerate a Mnist neural network classifier"
+publishDate: "05 Dec 2022"
+tags: [project, hardware]
+---
+
+![System Diagram](/static/images/mnist-hardware-accelerator-1.png)
+
+[**Lab Instructions**](https://github.com/WorldofKerry/CPEN-311-Lab4)
+
+# Summary
+
+Hardware accelerating a neural network classifier trained on MNIST.
+
+## Key Takeaways
+
+- Synthesize Soft processor (Nios II) on FPGA
+- Using hardware to accelerate dot product, memory access, and other operations
+- Using Platform Designer to design a custom system
+
+# Project Components
+
+## Implemented Modules
+
+- Wrapping the provided VGA core to use the Avalon Slave interface
+- Memory copy accelerator, to offload memory copying from the CPU (primarily for copying from SDRAM to on-chip)
+- Dot product accelerator, to accelerate the weight and activations multiplication
+- Faster dot product accelerator, to read the weights and activations in parallel
+
+HDL code can be provided upon request, due to course policies.
+
+## Simulation
+
+- Full rtl SystemVerilog testbenchs for all modules using ModelSim Altera
+- Testbenches in C to test interface with Nios II
+  - Gaussian blurring an image to test wrapped VGA core
+  - Basic tests for memory copy and dot product accelerators
+
+## Tools
+
+- Quartus Prime for compilation
+- Platform Designer for system design
+- Intel FPGA Monitor Tool for memory manipulation
+- ModelSim Altera for simulation
+
+## Hardware
+
+- DE1-SoC FPGA
+- VGA monitor
+
+## IP Modules Used (generated with Quartus Prime)
+
+- VGA core adapter
+- On-Chip Memory
+- Parallel I/O
+- SDRAM Controller
+- JTAG UART
+- Nios II Processor
+
+## Provided Information
+
+- C code for a Mnist neural network classifier using pure software
+
+# Results
+
+## Performance (with respect to software versions running on Nios II)
+
+- The dot product accelerator is able to accelerate the dot product by ~2.5x
+- The faster dot product accelerator is able to accelerate the dot product by ~3.5x
+- The memory copy accelerator is able to accelerate the memory copy by ~2.5x
+- The full system is able to accelerate the 3 layer Mnist neural network classifier by ~2.5x
+
+## System Design
+
+![System Diagram](/static/images/mnist-hardware-accelerator-1.png)
+The neural network and input image are initially uploaded to the SRAM (via FPGA Monitor). The processor then copies the input to bank0. In the first layer, bank0 is used as the input, and its output is stored in bank1. This alternates for each layer. At each layer, dot product with ReLU is used. Using a max function, the classified digit is then displayed on the 7-segment display. The vga output also displays the image that is currently being classified.

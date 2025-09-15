@@ -1,0 +1,73 @@
+---
+title: "Ubuntu"
+description: "Daily driving Ubuntu as my desktop OS. "
+publishDate: "30 Dec 2022"
+tags: [life]
+---
+
+[Important Post-Install Changes](#important-post-install-changes)  
+[Judging Other Distros]
+[#judging-other-distros]
+
+## Important Post-Install Changes <a name="important-post-install-changes" />
+
+### Swap File
+
+[Tutorial](https://askubuntu.com/questions/1274118/why-lubuntu-20-04-is-running-slow-when-i-use-opera-or-libreoffice), avoid programs going unresponsive when RAM is about to be maxed.
+
+### Wayland Firefox
+
+[Tutorial](https://www.reddit.com/r/firefox/comments/c8itj2/enabling_wayland_on_linux/), mainly for two finger swipe forward/back gesture.
+
+### Clipboard history
+
+#### Copyq (works for Ubuntu, not intuitive for Fedora)
+
+[Tutorial](https://askubuntu.com/questions/1287410/is-there-a-default-clipboard-history-in-ubuntu-if-there-is-how-can-i-access-it), in particular, "I assigned the Super + V shortcut through Ubuntu's Settings -> Keyboard Shortcuts, adding a custom one that runs a command copyq menu that brings up the tray menu."
+
+#### GPaste (works for Fedora)
+
+Install using Software, then enable `Enable the gnome-shell extension` under in GPaste preferences app, then run `sudo dnf install gnome-shell-extension-gpaste` to the the hotkeys to work properly.
+
+### Cloud Storage (Syncthing)
+
+[Tutorial](https://www.linuxfordevices.com/tutorials/ubuntu/syncthing-install-and-setup), peer-to-peer cloud storage.
+
+### Tiling Window Manager (Pop Shell)
+
+[Tutorial](https://support.system76.com/articles/pop-shell/), you might have to run the final commands in TTY. Setting `<Super> + <Space` to launcher is also convenient.
+
+## Judging Other Distros <a name="judging-other-distros" />
+
+### Pop!\_OS
+
+#### Pros
+
+- Auto-tiling is amazing
+
+#### Cons
+
+- Mouse disappearing after using touchpad is inconvenient
+- No secure boot
+
+### Linux Mint
+
+#### Pros
+
+- Synaptic and and software center feel better than Ubuntu defaults
+
+#### Cons
+
+- Doesn't support Pop Shell
+  - I tried i3-vm, the learning curve is pretty cracked
+  - I tried Krohnkite with KDE, hotkeys interferred with Mint and were less 'automatic' than Pop Shell's
+
+### Fedora
+
+#### Pros
+
+- Best integration with pop shell so far
+
+#### Cons
+
+- CopyQ doesn't seem to work unless I switch to xorg, which breaks pop shell
