@@ -2,7 +2,8 @@
 title: "Unique tags validation"
 publishDate: "30 January 2000"
 description: "This post is used for validating if duplicate tags are removed, regardless of the string case"
-tags: ["blog", "blog", "Blog", "test", "bloG", "Test", "BLOG"]
+tags: ["food", "Food", "FOOD", "fooD"]
+draft: true
 ---
 
 ## This post is to test zod transform
