@@ -1,4 +1,5 @@
 ---
+import SocialList from "@/components/SocialList.astro";
 import PageLayout from "@/layouts/Base.astro";
 
 const meta = {
@@ -11,26 +12,24 @@ const meta = {
 	<h1 class="title mb-12">About</h1>
 	<div class="prose prose-sm prose-cactus max-w-none">
 		<p>
-			Hi, I’m a starter Astro. I’m particularly great for getting you started with your own blogging
-			website.
+			Hi, I'm Kerry. I'm based out of Vancouver, BC. Welcome to my site!
 		</p>
-		<p>Here are my some of my awesome built in features:</p>
+		<p>This is what I've been up to recently:</p>
 		<ul class="list-inside list-disc" role="list">
-			<li>I'm ultra fast as I'm a static site</li>
-			<li>I'm fully responsive</li>
-			<li>I come with a light and dark mode</li>
-			<li>I'm easy to customise and add additional content</li>
-			<li>I have Tailwind CSS styling</li>
-			<li>Shiki code syntax highlighting</li>
-			<li>Satori for auto generating OG images for blog posts</li>
+			<li>Binged latest season of Futurama</li>
+			<li>Doing a lot of volleyball clinics / drop-ins to get better</li>
+			<li>Trying to eventually bench 225lbs</li>
+			<li>Getting more reading done</li>
+			<li>Improving the Wangerhub experience on the threadmill</li>
 		</ul>
 		<p>
-			Clone or fork my <a
+			This blog is a fork of this <a
 				class="cactus-link inline-block"
 				href="https://github.com/chrismwilliams/astro-cactus"
 				rel="noreferrer"
 				target="_blank">repo</a
-			> if you like me!
+			>!
 		</p>
 	</div>
+    <SocialList />
 </PageLayout>
