@@ -7,6 +7,8 @@
 
 Astro Cactus is a simple opinionated starter built with [Astro](https://astro.build). Use it to create an easy-to-use blog or website.
 
+> Set up private repo: https://stackoverflow.com/questions/10065526/github-how-to-make-a-fork-of-public-repository-private
+
 ## Table Of Contents
 
 1. [Key Features](#key-features)
