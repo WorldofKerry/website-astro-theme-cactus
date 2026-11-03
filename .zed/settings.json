@@ -1,11 +1,24 @@
 {
 	"lsp": {
-		"vscode-css-language-server": {
+		"biome": {
+			"settings": { "config_path": "./biome.json" },
+			"binary": {
+				"path": "./node_modules/.bin/biome",
+				"arguments": ["lsp-proxy"]
+			}
+		},
+		"tailwindcss-language-server": {
 			"settings": {
-				"css": {
-					"lint": {
-						"unknownAtRules": "ignore"
-					}
+				"includeLanguages": {
+					"astro": "html"
+				},
+				"experimental": {
+					"classRegex": [
+						"class=\"([^\"]*)\"",
+						"class='([^']*)'",
+						"class:list=\"{([^}]*)}\"",
+						"class:list='{([^}]*)}'"
+					]
 				}
 			}
 		}
@@ -41,6 +54,20 @@
 		},
 		"JSONC": {
 			"formatter": { "language_server": { "name": "biome" } },
+			"code_actions_on_format": {
+				"source.fixAll.biome": true,
+				"source.organizeImports.biome": true
+			}
+		},
+		"CSS": {
+			"language_servers": ["tailwindcss-intellisense-css", "!vscode-css-language-server", "..."],
+			"code_actions_on_format": {
+				"source.fixAll.stylelint": true
+			}
+		},
+		"Astro": {
+			"formatter": ["prettier", { "language_server": { "name": "biome" } }],
+			"format_on_save": "on",
 			"code_actions_on_format": {
 				"source.fixAll.biome": true,
 				"source.organizeImports.biome": true
